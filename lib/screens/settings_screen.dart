@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preferences_app_flutter/preferences/preferences.dart';
 import 'package:preferences_app_flutter/widgets/side_menu.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -11,9 +12,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = false;
-  int sex = 1;
-  String name = '';
+  // bool isDarkMode = false;
+  // int sex = 1;
+  // String name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -35,32 +36,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const Divider(),
             SwitchListTile.adaptive(
-              value: isDarkMode,
+              value: Preferences.darkMode,
               title: const Text('Dark Mode'),
               onChanged: (value) {
                 setState(() {
-                  isDarkMode = value;
+                  Preferences.darkMode = value;
                 });
               },
             ),
             RadioListTile<int>(
               value: 1,
-              groupValue: sex,
+              groupValue: Preferences.sex,
               title: const Text('Male'),
               onChanged: (value) {
                 setState(() {
-                  sex = value ?? 1;
+                  Preferences.sex = value ?? 1;
                 });
               },
             ),
             const Divider(),
             RadioListTile<int>(
               value: 2,
-              groupValue: sex,
+              groupValue: Preferences.sex,
               title: const Text('Female'),
               onChanged: (value) {
                 setState(() {
-                  sex = value ?? 2;
+                  Preferences.sex = value ?? 2;
                 });
               },
             ),
@@ -70,10 +71,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: TextFormField(
                 onChanged: (value) {
                   setState(() {
-                    name = value;
+                    Preferences.name = value;
                   });
                 },
-                initialValue: '',
+                initialValue: Preferences.name,
                 decoration: const InputDecoration(
                   labelText: 'Name',
                   helperText: 'User name',
