@@ -4,7 +4,7 @@ class Preferences {
   static late SharedPreferences _preferences;
 
   static String _name = '';
-  static bool _darkMode = false;
+  static bool _isDarkMode = false;
   static int _sex = 1;
 
   static Future<void> init() async {
@@ -20,12 +20,12 @@ class Preferences {
     _preferences.setString('name', value);
   }
 
-  static bool get darkMode {
-    return _preferences.getBool('darkMode') ?? _darkMode;
+  static bool get isDarkMode {
+    return _preferences.getBool('darkMode') ?? _isDarkMode;
   }
 
-  static set darkMode(bool value) {
-    _darkMode = value;
+  static set isDarkMode(bool value) {
+    _isDarkMode = value;
     _preferences.setBool('darkMode', value);
   }
 

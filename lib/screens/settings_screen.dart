@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:preferences_app_flutter/preferences/preferences.dart';
+import 'package:preferences_app_flutter/providers/providers.dart';
 import 'package:preferences_app_flutter/widgets/side_menu.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -12,10 +14,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  // bool isDarkMode = false;
-  // int sex = 1;
-  // String name = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +34,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const Divider(),
             SwitchListTile.adaptive(
-              value: Preferences.darkMode,
+              value: Preferences.isDarkMode,
               title: const Text('Dark Mode'),
               onChanged: (value) {
                 setState(() {
-                  Preferences.darkMode = value;
+                  Preferences.isDarkMode = value;
                 });
+                final themeProvider =
+                    Provider.of<ThemeProvider>(context, listen: false);
+                value
+                    ? themeProvider.setDarkMode()
+                    : themeProvider.setLightMode();
               },
             ),
             RadioListTile<int>(
